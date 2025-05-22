@@ -188,7 +188,7 @@ def train_loop(args, train_args, data, device, loggers, seed, model_save_name, v
     return best_valid
 
 
-def train_data(args, train_args, data, device, verbose=False):
+def train_data(args, train_args, data, device, verbose=True):
     """
     Run over n random seeds
     """
