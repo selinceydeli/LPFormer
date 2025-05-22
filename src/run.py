@@ -3,7 +3,7 @@ import argparse
 from collections import defaultdict
 
 import joblib  # Make ogb loads faster...idk
-from ogb.linkproppred import PygLinkPropPredDataset, Evaluator
+from ogb.linkproppred import Evaluator
 
 from util.utils import *
 from util.read_datasets import read_data_ogb, read_data_planetoid
