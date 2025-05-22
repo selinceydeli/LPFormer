@@ -12,8 +12,6 @@ from train.train_model import train_data, test
 from models.other_models import mlp_score
 from models.link_transformer import LinkTransformer
 
-
-
 def eval_model(cmd_args):
     """
     """
