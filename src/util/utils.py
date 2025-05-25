@@ -25,7 +25,7 @@ def save_model(model, score_func, optimizer, save_path):
     if not os.path.isdir(os.path.dirname(save_path)):
         os.makedirs(os.path.dirname(save_path))
     
-    print(f"Saving model to {save_path}...")
+    print(f"Saving model to {save_path}...", flush=True)
 
     state = {
         'model'	: model.state_dict(),

@@ -19,7 +19,7 @@ from models.link_transformer import LinkTransformer
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "dataset")
 
 
-def train_epoch(model, score_func, data, optimizer, args, device):
+def train_epoch(model, score_func, data, optimizer, args, device, current_epoch=None, current_run=None):
     model.train()
     score_func.train()
     train_pos = data["train_pos"].to(device)
@@ -29,7 +29,7 @@ def train_epoch(model, score_func, data, optimizer, args, device):
 
     total_loss = total_examples = 0
     d = DataLoader(range(train_pos.size(0)), args.batch_size, shuffle=True)
-    d = tqdm(d, "Epoch")
+    d = tqdm(d, desc=f"Run{current_run}_Epoch{current_epoch}" if current_epoch!=None and current_run!=None else "Epoch")
 
     for perm in d:
         edges = train_pos[perm].t()
@@ -129,7 +129,7 @@ def train_loop(args, train_args, data, device, loggers, seed, model_save_name, v
             end="",
         )
 
-        loss = train_epoch(model, score_func, data, optimizer, args, device)
+        loss = train_epoch(model, score_func, data, optimizer, args, device, current_epoch=epoch, current_run = seed)
         print(f"Epoch {epoch} Loss: {loss:.4f}\n" if verbose else "", end="")
 
         if epoch % args.eval_steps == 0:
@@ -188,12 +188,13 @@ def train_loop(args, train_args, data, device, loggers, seed, model_save_name, v
     return best_valid
 
 
-def train_data(args, train_args, data, device, verbose=False):
+def train_data(args, train_args, data, device, verbose=True):
     """
     Run over n random seeds
     """
     init_seed(args.seed)
 
+    args.save_as = f"lpformer_{datetime.now().strftime('%Y%m%d_%H%M%S')}"   
     if args.save_as is not None:
         model_save_name = os.path.join("checkpoints", args.data_name, args.save_as)
     else:
@@ -213,6 +214,18 @@ def train_data(args, train_args, data, device, verbose=False):
 
     # Over N splits
     best_valid_results = []
+    
+    # Print out the experiment details before starting
+    print(
+        f"Running experiment with:\n"
+        f"  Data: {args.data_name}\n"
+        f"  Runs: {args.runs}\n"
+        f"  Epochs: {args.epochs}\n"
+        f"  Batch Size: {args.batch_size}\n"
+        f"  Learning Rate: {train_args['lr']}\n"
+        f"  Weight Decay: {train_args['weight_decay']}\n"
+        f"  Save As: {model_save_name if model_save_name else 'Not saving'}\n"
+    )
 
     for seed in tqdm(range(0, args.runs), f"Training over {args.runs} seeds"):
         if args.runs > 1:
