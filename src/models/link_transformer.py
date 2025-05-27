@@ -94,6 +94,14 @@ class LinkTransformer(nn.Module):
         Method for computing pairwise distances between the nodes
         """
         return None
+    
+    """
+    TODO: Define the method for computing the pairwise features: compute_pairwise_dist(). Perhaps think about
+          storing the distances in the data (check what they are doing for PPR).
+    TODO: Change the get_pos_encodings(...) method to utilize pairwise distances instead of PPR.
+    TODO: Modify the node selection threshold. Currently, it is based on PPR, not pairwise distances.
+          Check compute_node_mask(...) method for filtering logic.
+    """
 
 
     def forward(self, batch, adj_prop=None, adj_mask=None, test_set=False, return_weights=False):
