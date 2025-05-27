@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="LPFormer_citeseer"
 #SBATCH --partition=gpu-a100
-#SBATCH --time=04:00:00
+#SBATCH --time=00:05:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-task=2
@@ -13,11 +13,15 @@ module load 2023r1
 module load python
 module load cuda
 
+# Change to the home directory
+cd /home/lemonhe/
+
 # Activate your conda environment
-source activate myenv
+conda init
+conda activate myenv
 
 # Change to LPFormer directory
-cd /home/lemonhe/LPFormer
+cd LPFormer
 
 # Create checkpoints directory if it doesn't exist
 mkdir -p checkpoints/citeseer
