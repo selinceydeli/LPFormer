@@ -64,8 +64,16 @@ class LinkTransformer(nn.Module):
             self.att_layers.append(LinkTransformerLayer(self.dim, train_args, out_dim=self.dim, node_dim=self.dim))
 
         self.elementwise_lin = MLP(2, self.dim, self.dim, self.dim)
+
+        # Structural info for pairwise distance based rpe
+        self.dist_encoder_cn = MLP(2, 2, self.dim, self.dim)
+        if self.mask == "1-hop":
+            self.dist_encoder_onehop = MLP(2, 2, self.dim, self.dim)
+        elif self.mask == "all":
+            self.dist_encoder_onehop = MLP(2, 2, self.dim, self.dim)
+            self.dist_encoder_non1hop = MLP(2, 2, self.dim, self.dim)
         
-        # Structural info
+        # Structural info for PPR based rpe
         self.ppr_encoder_cn = MLP(2, 2, self.dim, self.dim)
         if self.mask == "cn":
             count_dim = 1
@@ -79,6 +87,13 @@ class LinkTransformer(nn.Module):
         
         pairwise_dim = self.dim * train_args['num_heads'] + count_dim
         self.pairwise_lin = MLP(2, pairwise_dim, pairwise_dim, self.dim)  
+
+
+    def compute_pairwise_dist(self):
+        """
+        Method for computing pairwise distances between the nodes
+        """
+        return None
 
 
     def forward(self, batch, adj_prop=None, adj_mask=None, test_set=False, return_weights=False):
