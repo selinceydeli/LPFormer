@@ -2,7 +2,7 @@
 
 #SBATCH --job-name="LPFormer_citeseer"
 #SBATCH --partition=gpu-a100
-#SBATCH --time=00:05:00
+#SBATCH --time=02:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-task=2
@@ -17,8 +17,12 @@ module load cuda
 cd /home/lemonhe/
 
 # Activate your conda environment
-conda init
+source ~/miniconda3/etc/profile.d/conda.sh
 conda activate myenv
+
+# Verify environment is active
+echo "Active conda environment: $CONDA_DEFAULT_ENV"
+which python
 
 # Change to LPFormer directory
 cd LPFormer
