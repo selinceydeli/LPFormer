@@ -6,7 +6,7 @@ analysis/
 calc_heuristics.py 
 corr_analysis.py
 
-*.pt
+# *.pt
 /.idea
 /.vscode
 /doc/build
@@ -14,3 +14,5 @@ __pycache__
 *.pyc
 .DS_Store
 *.log
+*.out
+dataset/
