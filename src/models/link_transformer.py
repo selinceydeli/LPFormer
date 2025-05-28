@@ -263,8 +263,10 @@ class LinkTransformer(nn.Module):
         
         pair_ix, node_type, src_ppr, tgt_ppr = self.get_ppr_vals(batch, pair_adj, test_set)
 
-        cn_filt_cond = (src_ppr >= self.thresh_cn) & (tgt_ppr >= self.thresh_cn)
-        onehop_filt_cond = (src_ppr >= self.thresh_1hop) & (tgt_ppr >= self.thresh_1hop)
+        # TODO: Here, instead of creating a boolean mask based on the ppr score
+        # we will create a boolean mask based on the pairwise distances
+        cn_filt_cond = (src_ppr >= self.thresh_cn) & (tgt_ppr >= self.thresh_cn) 
+        onehop_filt_cond = (src_ppr >= self.thresh_1hop) & (tgt_ppr >= self.thresh_1hop) 
 
         if self.mask != "cn":
             filt_cond = torch.where(node_type == 1, onehop_filt_cond, cn_filt_cond)
@@ -272,7 +274,13 @@ class LinkTransformer(nn.Module):
             filt_cond = torch.where(node_type == 0, onehop_filt_cond, cn_filt_cond)
 
         pair_ix, node_type = pair_ix[:, filt_cond], node_type[filt_cond]
+        # Originally, src_ppr and tgt_ppr are not filtered
+        # print("Original src_ppr:", src_ppr, "and its shape is:", src_ppr.shape)
+        # print("Original tgt_ppr:", tgt_ppr, "and its shape is:", tgt_ppr.shape)
         src_ppr, tgt_ppr = src_ppr[filt_cond], tgt_ppr[filt_cond]
+        # Then, src_ppr and tgt_ppr are filtered
+        # print("Filtered src_ppr:", src_ppr, "and its shape is:", src_ppr.shape)
+        # print("Filtered tgt_ppr:", tgt_ppr, "and its shape is:", tgt_ppr.shape)
 
         # >1-Hop mask is gotten separately
         if self.mask == "all":
