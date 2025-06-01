@@ -44,6 +44,7 @@ class LinkTransformer(nn.Module):
             self.mask = "1-hop"
         else:
             self.mask = "all"
+        print("Mask type:", self.mask)
             
         self.dim = train_args['dim']
         self.att_drop = train_args.get('att_drop', 0)
@@ -499,6 +500,11 @@ class LinkTransformer(nn.Module):
         # Doesn't matter as they'll be filtered out by condition later 
         src_vals = src_vals - 1
         tgt_vals = tgt_vals - 1
+        
+        dis_matrix = self.data['dist_matrix']
+        src_dis = torch.index_select(dis_matrix, 0, batch[0])
+        tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
+        print("src_dis shape:", src_dis.shape, "and tgt_dis shape:", tgt_dis.shape)
 
         ppr_condition = (src_vals >= self.thresh_non1hop) & (tgt_vals >= self.thresh_non1hop)
         src_ix, src_vals, tgt_vals = src_ix[:, ppr_condition], src_vals[ppr_condition], tgt_vals[ppr_condition]

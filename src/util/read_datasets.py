@@ -11,6 +11,7 @@ import joblib  # Make ogb loads faster...idk
 from ogb.linkproppred import PygLinkPropPredDataset
 
 from util.calc_ppr_scores import get_ppr
+from util.compute_pairwise_dist import compute_dist_matrix
 
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "dataset")
@@ -241,6 +242,13 @@ def read_data_planetoid(args, device):
     data['ppr'] = get_ppr(args.data_name, data['edge_index'], data['num_nodes'],
                           0.15, args.eps, False).to(device)
     data['ppr_test'] = data['ppr']
+    
+    dist_matrix = compute_dist_matrix(data, args.data_name, save_dir=DATA_DIR)
+    data['dist_matrix'] = torch.from_numpy(dist_matrix).to(device)
+    print("Shape of the adjacency matrix for shortest path distances:", data['dist_matrix'].shape)
+    print("Adjacency matrix:", data['dist_matrix'])
+    print("Row-wise median of the adjacency matrix:", np.median(data['dist_matrix'], axis=0))
+
 
     # Overwrite standard negative
     if args.heart:
