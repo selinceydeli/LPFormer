@@ -15,4 +15,5 @@ __pycache__
 .DS_Store
 *.log
 *.out
-# dataset/
+dataset/
+node_subsets/
