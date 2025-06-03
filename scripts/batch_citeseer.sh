@@ -19,7 +19,8 @@ cd /home/lemonhe/
 # Activate your conda environment
 source ~/miniconda3/etc/profile.d/conda.sh
 conda init
-conda activate myenv
+conda activate miniconda3/envs/myenv
+# conda activate myenv
 
 # Verify environment is active
 echo "Active conda environment: $CONDA_DEFAULT_ENV"

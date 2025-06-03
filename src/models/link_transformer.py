@@ -38,12 +38,13 @@ class LinkTransformer(nn.Module):
 
         # Allows for easier way to know if we need to ignore some set of nodes
         # Also allows us to be more efficient
-        if self.thresh_non1hop == 1 and self.thresh_1hop == 1:
-            self.mask = "cn"
-        elif self.thresh_non1hop == 1 and self.thresh_1hop < 1:
-            self.mask = "1-hop"
-        else:
-            self.mask = "all"
+        self.mask = "all"
+        # if self.thresh_non1hop == 1 and self.thresh_1hop == 1:
+        #     self.mask = "cn"
+        # elif self.thresh_non1hop == 1 and self.thresh_1hop < 1:
+        #     self.mask = "1-hop"
+        # else:
+        #     self.mask = "all"
         print("Mask type:", self.mask)
             
         self.dim = train_args['dim']
@@ -527,9 +528,9 @@ class LinkTransformer(nn.Module):
         # Get values for target nodes
         tgt_vals = tgt_dis[src_indices[0], src_indices[1]]
 
-        print("Our indices:", src_indices)
-        print("Our source values:", src_vals)
-        print("Our target values:", tgt_vals)
+        # print("Our indices:", src_indices)
+        # print("Our source values:", src_vals)
+        # print("Our target values:", tgt_vals)
 
         return src_indices, src_vals, tgt_vals
 
