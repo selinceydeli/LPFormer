@@ -26,6 +26,9 @@ conda activate miniconda3/envs/myenv
 echo "Active conda environment: $CONDA_DEFAULT_ENV"
 which python
 
+# Print current timestamp
+echo "Current timestamp: $(date)"
+
 # Change to LPFormer directory
 cd LPFormer
 
@@ -34,7 +37,7 @@ mkdir -p checkpoints/citeseer
 
 # Run the LPFormer training
 # For testing, reduce epochs and runs
-python src/run.py \
+/home/lemonhe/miniconda3/envs/myenv/bin/python src/run.py \
     --data_name citeseer \
     --lr 5e-3 \
     --gnn-layers 1 \
@@ -56,6 +59,6 @@ python src/run.py \
     --non-verbose \
     --l2 0 \
     --runs 10 \
-    --device 0 > citeseer_training.log 2>&1
+    --device 0 > citeseer_training_custom.log 2>&1
 
-echo "Training completed. Check citeseer_training.log for results."
+echo "Training completed. Check citeseer_training_custom.log for results."
