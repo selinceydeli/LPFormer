@@ -247,7 +247,7 @@ def read_data_planetoid(args, device):
     data['dist_matrix'] = torch.from_numpy(dist_matrix).to(device)
     print("Shape of the adjacency matrix for shortest path distances:", data['dist_matrix'].shape)
     print("Adjacency matrix:", data['dist_matrix'])
-    print("Row-wise median of the adjacency matrix:", np.median(data['dist_matrix'], axis=0))
+    # print("Row-wise median of the adjacency matrix:", np.median(data['dist_matrix'], axis=0))
 
 
     # Overwrite standard negative

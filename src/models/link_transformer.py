@@ -502,6 +502,8 @@ class LinkTransformer(nn.Module):
         src_vals = src_vals - 1
         tgt_vals = tgt_vals - 1
 
+        ppr_condition = (src_vals >= self.thresh_non1hop) & (tgt_vals >= self.thresh_non1hop)
+        src_ix, src_vals, tgt_vals = src_ix[:, ppr_condition], src_vals[ppr_condition], tgt_vals[ppr_condition]
         # print("Original threshold approach - src_vals shape:", src_vals.shape, "and tgt_vals shape:", tgt_vals.shape)
         
         dis_matrix = self.data['dist_matrix']
@@ -509,14 +511,11 @@ class LinkTransformer(nn.Module):
         tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
         # print("Our threshold approach - src_dis shape:", src_dis.shape, "and tgt_dis shape:", tgt_dis.shape)
 
-        ppr_condition = (src_vals >= self.thresh_non1hop) & (tgt_vals >= self.thresh_non1hop)
-        src_ix, src_vals, tgt_vals = src_ix[:, ppr_condition], src_vals[ppr_condition], tgt_vals[ppr_condition]
-
         # print("Original indices:", src_ix)
         # print("Original source values:", src_vals)
         # print("Original target values:", tgt_vals)
 
-        # TODO Selin & Lemon: Add a new threshold based on adjacency matrix
+        # Add a new threshold based on adjacency matrix
         # The threshold for pairwise distance is selected manually based on the concept of hops. 
         # Initially, we select a threshold of 5, which means the two nodes can be at most 5-hops away.
         hop_condition = (src_dis <= 5) & (tgt_dis <= 5)
