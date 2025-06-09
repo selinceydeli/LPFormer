@@ -133,7 +133,9 @@ def get_calc_ppr():
     """
     import numba
 
-    @numba.jit(nopython=True, parallel=True)
+    # @numba.jit(nopython=True, parallel=True)
+    @numba.jit
+    
     def calc_ppr(
         indptr: np.ndarray,
         indices: np.ndarray,
