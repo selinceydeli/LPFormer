@@ -529,7 +529,8 @@ class LinkTransformer(nn.Module):
 
     def get_non_1hop_ppr(self, batch, test_set=False):
         """
-        Get PPR scores for non-1hop nodes.
+        Get PPR scores for non-1hop nodes
+        Or pairwise distances using sparse matrix representation
 
         NOTE: Use original adj_mask (in train_model.train_epoch() we remove the batch links)
         Done since removing them converts src/tgt to >1-hop nodes
@@ -581,8 +582,8 @@ class LinkTransformer(nn.Module):
         )
         # print("Original threshold approach - src_vals shape:", src_vals.shape, "and tgt_vals shape:", tgt_vals.shape)
 
-        # Method2: Adjancy matrix for pairwise distance
 
+        # Method2: Sparse adjacency matrix for pairwise distance
         dis_matrix = self.data["dist_matrix"]
         src_dis = torch.index_select(dis_matrix, 0, batch[0])
         tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
@@ -596,15 +597,7 @@ class LinkTransformer(nn.Module):
 
         src_dis_vals = src_dis_vals - 1
         tgt_dis_vals = tgt_dis_vals - 1
-        # print("Our threshold approach - src_dis shape:", src_dis.shape, "and tgt_dis shape:", tgt_dis.shape)
-
-        # print("Original indices:", src_ix)
-        # print("Original source values:", src_vals)
-        # print("Original target values:", tgt_vals)
-
-        # Add a new threshold based on adjacency matrix
-        # The threshold for pairwise distance is selected manually based on the concept of hops.
-        # Initially, we select a threshold of 5, which means the two nodes can be at most 5-hops away.
+     
         hop_condition = (src_dis_vals <= 5) & (tgt_dis_vals <= 5)
 
         src_ix_dis, src_dis_vals, tgt_dis_vals = (
@@ -614,3 +607,24 @@ class LinkTransformer(nn.Module):
         )
         
         return src_ix_dis, src_dis_vals, tgt_dis_vals
+
+    
+    def get_non_1hop_dense_pairwise_dist(self, batch, test_set=False):
+        """
+        Method for selecting multi-hop nodes based on dense matrix representation
+        of pairwise distances
+        """
+        dis_matrix = self.data['dist_matrix']
+        src_dis = torch.index_select(dis_matrix, 0, batch[0])
+        tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
+    
+        hop_condition = (src_dis <= 5) & (tgt_dis <= 5)
+
+        # Get indices and values for source nodes
+        src_indices = hop_condition.nonzero(as_tuple=False).t()
+        src_vals = src_dis[src_indices[0], src_indices[1]]
+
+        # Get values for target nodes
+        tgt_vals = tgt_dis[src_indices[0], src_indices[1]]
+
+        return src_indices, src_vals, tgt_vals
