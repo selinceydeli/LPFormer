@@ -11,7 +11,7 @@ import joblib  # Make ogb loads faster...idk
 from ogb.linkproppred import PygLinkPropPredDataset
 
 from util.calc_ppr_scores import get_ppr
-from util.compute_pairwise_dist import compute_dist_matrix, convert_to_sparse_matrix
+from util.compute_pairwise_dist import compute_dist_matrix, convert_to_sparse_matrix, dist_matrix_to_topk_edges
 
 
 DATA_DIR = os.path.join(
@@ -298,6 +298,14 @@ def read_data_planetoid(args, device):
         data["dist_matrix"].shape,
     )
     print("Sparse adjacency matrix:", data["dist_matrix"])
+
+    # Try to made the computations on the distance matrix faster
+    # by utilizing edge_indices for fast indexing
+    edge_index, edge_attr = dist_matrix_to_topk_edges(dist_matrix, k=16)
+
+    data["dist_edge_index"] = edge_index.to(device)
+    data["dist_edge_attr"] = edge_attr.to(device)
+
     # print("Row-wise median of the adjacency matrix:", np.median(data['dist_matrix'], axis=0))
 
     # Overwrite standard negative

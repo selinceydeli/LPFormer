@@ -56,3 +56,47 @@ def convert_to_sparse_matrix(dist_matrix):
     )
 
     return sparse_matrix
+
+
+def dist_matrix_to_topk_edges(dist_matrix, k=16):
+    """
+    Convert dense pairwise distance matrix to sparse edge_index and edge_attr format.
+    Retains k nearest neighbors for each node.
+
+    Returns: edge_index and edge_attr
+
+    Example:
+    # Store all edges in the graph
+    edge_index = torch.tensor([
+        [0, 1, 2],  # source nodes
+        [1, 2, 0]   # target nodes
+    ])
+
+    # Store shortest distances corresponding to edges
+    edge_attr = torch.tensor([1.0, 2.0, 3.0]) 
+    """
+    num_nodes = dist_matrix.shape[0]
+
+    # Replace infs with a large number for sorting
+    safe_dist_matrix = np.copy(dist_matrix)
+    safe_dist_matrix[np.isinf(safe_dist_matrix)] = np.max(safe_dist_matrix[np.isfinite(safe_dist_matrix)]) + 1
+
+    edge_sources = []
+    edge_targets = []
+    edge_distances = []
+
+    for i in range(num_nodes):
+        # Get indices of k smallest distances for node i (excluding self)
+        dists = safe_dist_matrix[i]
+        neighbors = np.argsort(dists)[:k+1]  # include self
+        neighbors = neighbors[neighbors != i][:k]  # exclude self, ensure k
+
+        for j in neighbors:
+            edge_sources.append(i)
+            edge_targets.append(j)
+            edge_distances.append(dist_matrix[i, j])  # original distance (could be inf)
+
+    edge_index = torch.tensor([edge_sources, edge_targets], dtype=torch.long) # shape: [2, num_edges]
+    edge_attr = torch.tensor(edge_distances, dtype=torch.float32) # shape: [num_edges]
+
+    return edge_index, edge_attr
