@@ -3,11 +3,12 @@ import numpy as np
 import torch
 import networkx as nx
 
+
 def compute_dist_matrix(data, data_name, save_dir, force_recompute=False):
-    '''
+    """
     Computes shortest path distance between each node pair in the Graph data once for the first time
     And stores the computed adjacency matrix for accessing it in the remaining runs
-    '''
+    """
     os.makedirs(save_dir, exist_ok=True)
     dist_path = os.path.join(save_dir, f"{data_name}_dist_matrix.npy")
 
@@ -18,8 +19,8 @@ def compute_dist_matrix(data, data_name, save_dir, force_recompute=False):
 
     print("Computing distance matrix with Dijkstra's algorithm...")
     # Load number of nodes and edge indices from the data (precomputed and stored within read_datasets.py file)
-    num_nodes = data['num_nodes']
-    edge_index = data['edge_index'].cpu().numpy()
+    num_nodes = data["num_nodes"]
+    edge_index = data["edge_index"].cpu().numpy()
     G = nx.Graph()
     G.add_nodes_from(range(num_nodes))
     edges = list(zip(edge_index[0], edge_index[1]))
@@ -36,3 +37,22 @@ def compute_dist_matrix(data, data_name, save_dir, force_recompute=False):
     print(f"Saved distance matrix to {dist_path}")
     return dist_matrix
 
+
+def convert_to_sparse_matrix(dist_matrix):
+    """
+    Convert a dense distance matrix to a sparse matrix format.
+    """
+    # Convert inf values to 0 for sparse representation
+    dist_matrix = np.where(np.isinf(dist_matrix), 0, dist_matrix)
+
+    # Store this non-zero values in a sparse matrix format
+    row_indices, col_indices = np.nonzero(dist_matrix)
+    values = dist_matrix[row_indices, col_indices]
+
+    sparse_matrix = torch.sparse_coo_tensor(
+        indices=torch.tensor([row_indices, col_indices]),
+        values=torch.tensor(values, dtype=torch.float32),
+        size=dist_matrix.shape,
+    )
+
+    return sparse_matrix
