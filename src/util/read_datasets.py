@@ -292,7 +292,7 @@ def read_data_planetoid(args, device):
 
     dist_matrix = compute_dist_matrix(data, args.data_name, save_dir=DATA_DIR)
     sparse_dist_matrix = convert_to_sparse_matrix(dist_matrix)
-    data["dist_matrix"] = torch.from_numpy(sparse_dist_matrix).to(device)
+    data["dist_matrix"] = sparse_dist_matrix.to(device)
     print(
         "Shape of the sparse adjacency matrix for shortest path distances:",
         data["dist_matrix"].shape,
