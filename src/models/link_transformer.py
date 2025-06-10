@@ -598,7 +598,12 @@ class LinkTransformer(nn.Module):
         src_dis_vals = src_dis_vals - 1
         tgt_dis_vals = tgt_dis_vals - 1
      
-        hop_condition = (src_dis_vals <= 5) & (tgt_dis_vals <= 5)
+        mean_src_dis = torch.mean(src_dis_vals)
+        mean_tgt_dis = torch.mean(tgt_dis_vals)
+        # print(
+        #     "Mean src dis:", mean_src_dis, "and Mean tgt dis:", mean_tgt_dis
+        # )
+        hop_condition = (src_dis_vals <= mean_src_dis) & (tgt_dis_vals <= mean_tgt_dis)
 
         src_ix_dis, src_dis_vals, tgt_dis_vals = (
             src_ix_dis[:, hop_condition],
