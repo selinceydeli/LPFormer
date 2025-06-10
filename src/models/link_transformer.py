@@ -584,61 +584,34 @@ class LinkTransformer(nn.Module):
 
 
         # Method2: Sparse adjacency matrix for pairwise distance
-        # dis_matrix = self.data["dist_matrix"]
-        # src_dis = torch.index_select(dis_matrix, 0, batch[0])
-        # tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
+        dis_matrix = self.data["dist_matrix"]
+        src_dis = torch.index_select(dis_matrix, 0, batch[0])
+        tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
 
-        # src_dis_add = src_dis + torch.sign(tgt_dis)
-        # tgt_dis_add = tgt_dis + torch.sign(src_dis)
+        src_dis_add = src_dis + torch.sign(tgt_dis)
+        tgt_dis_add = tgt_dis + torch.sign(src_dis)
 
-        # src_ix_dis = src_dis_add.coalesce().indices()
-        # src_dis_vals = src_dis_add.coalesce().values()
-        # tgt_dis_vals = tgt_dis_add.coalesce().values()
+        src_ix_dis = src_dis_add.coalesce().indices()
+        src_dis_vals = src_dis_add.coalesce().values()
+        tgt_dis_vals = tgt_dis_add.coalesce().values()
 
-        # src_dis_vals = src_dis_vals - 1
-        # tgt_dis_vals = tgt_dis_vals - 1
+        src_dis_vals = src_dis_vals - 1
+        tgt_dis_vals = tgt_dis_vals - 1
      
-        # mean_src_dis = torch.mean(src_dis_vals)
-        # mean_tgt_dis = torch.mean(tgt_dis_vals)
-        # # print(
-        # #     "Mean src dis:", mean_src_dis, "and Mean tgt dis:", mean_tgt_dis
-        # # )
-        # hop_condition = (src_dis_vals <= mean_src_dis) & (tgt_dis_vals <= mean_tgt_dis)
-
-        # src_ix_dis, src_dis_vals, tgt_dis_vals = (
-        #     src_ix_dis[:, hop_condition],
-        #     src_dis_vals[hop_condition],
-        #     tgt_dis_vals[hop_condition],
+        mean_src_dis = torch.mean(src_dis_vals)
+        mean_tgt_dis = torch.mean(tgt_dis_vals)
+        # print(
+        #     "Mean src dis:", mean_src_dis, "and Mean tgt dis:", mean_tgt_dis
         # )
+        hop_condition = (src_dis_vals <= mean_src_dis) & (tgt_dis_vals <= mean_tgt_dis)
+
+        src_ix_dis, src_dis_vals, tgt_dis_vals = (
+            src_ix_dis[:, hop_condition],
+            src_dis_vals[hop_condition],
+            tgt_dis_vals[hop_condition],
+        )
         
-        # return src_ix_dis, src_dis_vals, tgt_dis_vals
-
-        edge_index = self.data["dist_edge_index"]  # shape: [2, num_edges]
-        edge_attr = self.data["dist_edge_attr"]    # shape: [num_edges]
-
-        src_nodes = batch[0]
-        tgt_nodes = batch[1]
-
-        # Mask for edges where both ends are in batch
-        src_in_batch = torch.isin(edge_index[0], src_nodes)
-        tgt_in_batch = torch.isin(edge_index[1], tgt_nodes)
-        batch_mask = src_in_batch & tgt_in_batch
-
-        filtered_edge_index = edge_index[:, batch_mask]
-        filtered_edge_attr = edge_attr[batch_mask]
-
-        # Compute mean distance threshold
-        mean_distance = torch.mean(filtered_edge_attr)
-
-        # Keep edges with distances <= mean
-        close_mask = filtered_edge_attr <= mean_distance
-        selected_edge_index = filtered_edge_index[:, close_mask]
-        selected_edge_attr = filtered_edge_attr[close_mask]
-
-        src_dis_vals = selected_edge_attr
-        tgt_dis_vals = selected_edge_attr
-
-        return selected_edge_index, src_dis_vals, tgt_dis_vals
+        return src_ix_dis, src_dis_vals, tgt_dis_vals
 
     
     def get_non_1hop_dense_pairwise_dist(self, batch, test_set=False):
