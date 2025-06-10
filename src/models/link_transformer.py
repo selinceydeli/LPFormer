@@ -590,6 +590,7 @@ class LinkTransformer(nn.Module):
         src_dis_add = src_dis + torch.sign(tgt_dis)
         tgt_dis_add = tgt_dis + torch.sign(src_dis)
 
+        src_ix_dis = src_dis_add.coalesce().indices()
         src_dis_vals = src_dis_add.coalesce().values()
         tgt_dis_vals = tgt_dis_add.coalesce().values()
 
@@ -606,15 +607,10 @@ class LinkTransformer(nn.Module):
         # Initially, we select a threshold of 5, which means the two nodes can be at most 5-hops away.
         hop_condition = (src_dis_vals <= 5) & (tgt_dis_vals <= 5)
 
-        # Get indices and values for source nodes
-        src_indices = hop_condition.nonzero(as_tuple=False).t()
-        src_vals = src_dis[src_indices[0], src_indices[1]]
-
-        # Get values for target nodes
-        tgt_vals = tgt_dis[src_indices[0], src_indices[1]]
-
-        # print("Our indices:", src_indices)
-        # print("Our source values:", src_vals)
-        # print("Our target values:", tgt_vals)
-
-        return src_indices, src_vals, tgt_vals
+        src_ix_dis, src_dis_vals, tgt_dis_vals = (
+            src_ix_dis[:, hop_condition],
+            src_dis_vals[hop_condition],
+            tgt_dis_vals[hop_condition],
+        )
+        
+        return src_ix_dis, src_dis_vals, tgt_dis_vals
