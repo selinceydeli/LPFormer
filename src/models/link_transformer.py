@@ -507,6 +507,13 @@ class LinkTransformer(nn.Module):
         # print("Original threshold approach - src_vals shape:", src_vals.shape, "and tgt_vals shape:", tgt_vals.shape)
         
         dis_matrix = self.data['dist_matrix']
+
+        # Replace infinite values with zeroes to then select only the non-zero distance values
+        dis_matrix = np.where(np.isinf(dis_matrix), 0, dis_matrix) 
+
+        # Convert back to a torch tensor
+        dis_matrix = torch.tensor(dis_matrix, dtype=torch.float32, device=batch[0].device)
+
         src_dis = torch.index_select(dis_matrix, 0, batch[0])
         tgt_dis = torch.index_select(dis_matrix, 0, batch[1])
         # print("Our threshold approach - src_dis shape:", src_dis.shape, "and tgt_dis shape:", tgt_dis.shape)
@@ -523,7 +530,7 @@ class LinkTransformer(nn.Module):
         print(
             "Mean src dis:", mean_src_dis, "and Mean tgt dis:", mean_tgt_dis
         )
-        hop_condition = (src_dis_vals <= mean_src_dis) & (tgt_dis_vals <= mean_tgt_dis)
+        hop_condition = (src_dis <= mean_src_dis) & (tgt_dis <= mean_tgt_dis)
 
         # Get indices and values for source nodes
         src_indices = hop_condition.nonzero(as_tuple=False).t()
