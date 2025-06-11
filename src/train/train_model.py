@@ -171,6 +171,10 @@ def train_loop(args, train_args, data, device, loggers, seed, model_save_name, v
             best_valid_current = torch.tensor(loggers[eval_metric].results[seed])[
                 :, 1
             ].max()
+            
+            print(
+                f"Epoch {epoch} Best Valid: {best_valid_current:.4f}\n"
+            )
 
             if best_valid_current > best_valid:
                 kill_cnt = 0
@@ -239,6 +243,10 @@ def train_data(args, train_args, data, device, verbose=True):
             args, train_args, data, device, loggers, seed, run_save_name, verbose
         )
         best_valid_results.append(best_valid)
+        
+        print(
+            f"Run {seed + 1} Best Valid: {best_valid:.4f}\n"
+        )
 
     for key in loggers.keys():
         if key == args.metric:
