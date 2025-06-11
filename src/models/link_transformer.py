@@ -518,7 +518,12 @@ class LinkTransformer(nn.Module):
         # Add a new threshold based on adjacency matrix
         # The threshold for pairwise distance is selected manually based on the concept of hops. 
         # Initially, we select a threshold of 5, which means the two nodes can be at most 5-hops away.
-        hop_condition = (src_dis <= 5) & (tgt_dis <= 5)
+        mean_src_dis = torch.mean(src_dis)
+        mean_tgt_dis = torch.mean(tgt_dis)
+        print(
+            "Mean src dis:", mean_src_dis, "and Mean tgt dis:", mean_tgt_dis
+        )
+        hop_condition = (src_dis_vals <= mean_src_dis) & (tgt_dis_vals <= mean_tgt_dis)
 
         # Get indices and values for source nodes
         src_indices = hop_condition.nonzero(as_tuple=False).t()
