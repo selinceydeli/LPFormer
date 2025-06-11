@@ -1,0 +1,281 @@
+# of nodes in citeseer is:  3327
+PPR matrix exists. Loading from file...
+Loading distance matrix from /home/sceydeli/LPFormer/src/util/../../dataset/citeseer_dist_matrix.npy
+Shape of the adjacency matrix for shortest path distances: torch.Size([3327, 3327])
+Adjacency matrix: tensor([[ 0., inf, inf,  ..., inf, inf, inf],
+        [inf,  0., inf,  ...,  6., inf,  7.],
+        [inf, inf,  0.,  ..., inf, inf, inf],
+        ...,
+        [inf,  6., inf,  ...,  0., inf, 10.],
+        [inf, inf, inf,  ..., inf,  0., inf],
+        [inf,  7., inf,  ..., 10., inf,  0.]])
+Running experiment with:
+  Data: citeseer
+  Runs: 1
+  Epochs: 10
+  Batch Size: 1024
+  Learning Rate: 0.005
+  Weight Decay: 0.0
+  Save As: checkpoints/citeseer/lpformer_20250611_125215
+
+
+Training over 1 seeds:   0%|          | 0/1 [00:00<?, ?it/s]Mask type: all
+
+
+Run0_Epoch1:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch1:  25%|██▌       | 1/4 [00:35<01:45, 35.15s/it][A
+
+Run0_Epoch1:  50%|█████     | 2/4 [01:08<01:08, 34.02s/it][A
+
+Run0_Epoch1:  75%|███████▌  | 3/4 [01:47<00:36, 36.30s/it][A
+
+Run0_Epoch1: 100%|██████████| 4/4 [02:15<00:00, 33.22s/it][A
+Run0_Epoch1: 100%|██████████| 4/4 [02:15<00:00, 33.97s/it]
+Mean src dis: tensor(3.6878) and Mean tgt dis: tensor(3.7048)
+Mean src dis: tensor(3.0619) and Mean tgt dis: tensor(2.9758)
+Mean src dis: tensor(3.8723) and Mean tgt dis: tensor(3.8683)
+Mean src dis: tensor(2.9035) and Mean tgt dis: tensor(2.9528)
+Mean src dis: tensor(3.8426) and Mean tgt dis: tensor(3.8426)
+Mean src dis: tensor(2.9002) and Mean tgt dis: tensor(2.9897)
+Mean src dis: tensor(3.9785) and Mean tgt dis: tensor(4.0084)
+Mean src dis: tensor(2.8925) and Mean tgt dis: tensor(3.1504)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+Saving model to checkpoints/citeseer/lpformer_20250611_125215.pt...
+
+
+Run0_Epoch2:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch2:  25%|██▌       | 1/4 [01:19<03:57, 79.28s/it][A
+
+Run0_Epoch2:  50%|█████     | 2/4 [01:55<01:48, 54.21s/it][A
+
+Run0_Epoch2:  75%|███████▌  | 3/4 [02:27<00:43, 43.92s/it][A
+
+Run0_Epoch2: 100%|██████████| 4/4 [03:00<00:00, 39.45s/it][A
+Run0_Epoch2: 100%|██████████| 4/4 [03:00<00:00, 45.05s/it]
+Mean src dis: tensor(3.8827) and Mean tgt dis: tensor(3.8928)
+Mean src dis: tensor(3.0911) and Mean tgt dis: tensor(2.8439)
+Mean src dis: tensor(3.7062) and Mean tgt dis: tensor(3.7183)
+Mean src dis: tensor(3.0752) and Mean tgt dis: tensor(2.9723)
+Mean src dis: tensor(3.9210) and Mean tgt dis: tensor(3.9322)
+Mean src dis: tensor(2.9620) and Mean tgt dis: tensor(3.1243)
+Mean src dis: tensor(3.8409) and Mean tgt dis: tensor(3.8447)
+Mean src dis: tensor(2.9634) and Mean tgt dis: tensor(2.7591)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch3:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch3:  25%|██▌       | 1/4 [00:50<02:32, 50.78s/it][A
+
+Run0_Epoch3:  50%|█████     | 2/4 [01:26<01:23, 41.82s/it][A
+
+Run0_Epoch3:  75%|███████▌  | 3/4 [02:14<00:44, 44.50s/it][A
+
+Run0_Epoch3: 100%|██████████| 4/4 [02:46<00:00, 39.64s/it][A
+Run0_Epoch3: 100%|██████████| 4/4 [02:46<00:00, 41.55s/it]
+Mean src dis: tensor(3.8573) and Mean tgt dis: tensor(3.8449)
+Mean src dis: tensor(2.8965) and Mean tgt dis: tensor(3.0420)
+Mean src dis: tensor(3.8324) and Mean tgt dis: tensor(3.8538)
+Mean src dis: tensor(3.0327) and Mean tgt dis: tensor(2.8865)
+Mean src dis: tensor(3.9015) and Mean tgt dis: tensor(3.9273)
+Mean src dis: tensor(2.8971) and Mean tgt dis: tensor(3.1507)
+Mean src dis: tensor(3.7367) and Mean tgt dis: tensor(3.7385)
+Mean src dis: tensor(2.9819) and Mean tgt dis: tensor(2.9280)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch4:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch4:  25%|██▌       | 1/4 [00:57<02:51, 57.27s/it][A
+
+Run0_Epoch4:  50%|█████     | 2/4 [02:02<02:03, 61.98s/it][A
+
+Run0_Epoch4:  75%|███████▌  | 3/4 [03:24<01:11, 71.10s/it][A
+
+Run0_Epoch4: 100%|██████████| 4/4 [04:28<00:00, 68.31s/it][A
+Run0_Epoch4: 100%|██████████| 4/4 [04:28<00:00, 67.13s/it]
+Mean src dis: tensor(3.9675) and Mean tgt dis: tensor(3.9712)
+Mean src dis: tensor(2.9168) and Mean tgt dis: tensor(3.0285)
+Mean src dis: tensor(3.7581) and Mean tgt dis: tensor(3.7632)
+Mean src dis: tensor(2.8894) and Mean tgt dis: tensor(2.7880)
+Mean src dis: tensor(3.8458) and Mean tgt dis: tensor(3.8624)
+Mean src dis: tensor(2.9921) and Mean tgt dis: tensor(2.8476)
+Mean src dis: tensor(3.7619) and Mean tgt dis: tensor(3.7761)
+Mean src dis: tensor(2.8295) and Mean tgt dis: tensor(2.8482)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+Saving model to checkpoints/citeseer/lpformer_20250611_125215.pt...
+
+
+Run0_Epoch5:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch5:  25%|██▌       | 1/4 [01:27<04:23, 87.78s/it][A
+
+Run0_Epoch5:  50%|█████     | 2/4 [02:58<02:59, 89.75s/it][A
+
+Run0_Epoch5:  75%|███████▌  | 3/4 [04:13<01:22, 82.74s/it][A
+
+Run0_Epoch5: 100%|██████████| 4/4 [05:14<00:00, 74.20s/it][A
+Run0_Epoch5: 100%|██████████| 4/4 [05:14<00:00, 78.61s/it]
+Mean src dis: tensor(3.7663) and Mean tgt dis: tensor(3.8030)
+Mean src dis: tensor(2.8637) and Mean tgt dis: tensor(3.0164)
+Mean src dis: tensor(3.8739) and Mean tgt dis: tensor(3.8728)
+Mean src dis: tensor(2.9386) and Mean tgt dis: tensor(2.8664)
+Mean src dis: tensor(3.9314) and Mean tgt dis: tensor(3.9352)
+Mean src dis: tensor(2.9028) and Mean tgt dis: tensor(3.0842)
+Mean src dis: tensor(3.7618) and Mean tgt dis: tensor(3.7577)
+Mean src dis: tensor(2.9335) and Mean tgt dis: tensor(3.1090)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch6:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch6:  25%|██▌       | 1/4 [01:02<03:06, 62.31s/it][A
+
+Run0_Epoch6:  50%|█████     | 2/4 [02:22<02:26, 73.04s/it][A
+
+Run0_Epoch6:  75%|███████▌  | 3/4 [03:44<01:16, 76.93s/it][A
+
+Run0_Epoch6: 100%|██████████| 4/4 [04:39<00:00, 68.30s/it][A
+Run0_Epoch6: 100%|██████████| 4/4 [04:39<00:00, 69.87s/it]
+Mean src dis: tensor(3.8089) and Mean tgt dis: tensor(3.8250)
+Mean src dis: tensor(2.9983) and Mean tgt dis: tensor(3.0369)
+Mean src dis: tensor(3.8850) and Mean tgt dis: tensor(3.8781)
+Mean src dis: tensor(2.8606) and Mean tgt dis: tensor(2.8931)
+Mean src dis: tensor(3.8356) and Mean tgt dis: tensor(3.8451)
+Mean src dis: tensor(3.0066) and Mean tgt dis: tensor(3.0727)
+Mean src dis: tensor(3.8159) and Mean tgt dis: tensor(3.8385)
+Mean src dis: tensor(3.0241) and Mean tgt dis: tensor(2.9960)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch7:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch7:  25%|██▌       | 1/4 [00:59<02:59, 59.80s/it][A
+
+Run0_Epoch7:  50%|█████     | 2/4 [01:54<01:53, 56.99s/it][A
+
+Run0_Epoch7:  75%|███████▌  | 3/4 [02:46<00:54, 54.79s/it][A
+
+Run0_Epoch7: 100%|██████████| 4/4 [03:22<00:00, 47.25s/it][A
+Run0_Epoch7: 100%|██████████| 4/4 [03:22<00:00, 50.67s/it]
+Mean src dis: tensor(3.7979) and Mean tgt dis: tensor(3.8057)
+Mean src dis: tensor(2.9763) and Mean tgt dis: tensor(3.0055)
+Mean src dis: tensor(3.8223) and Mean tgt dis: tensor(3.8309)
+Mean src dis: tensor(3.0238) and Mean tgt dis: tensor(2.9329)
+Mean src dis: tensor(3.8795) and Mean tgt dis: tensor(3.8813)
+Mean src dis: tensor(2.7942) and Mean tgt dis: tensor(2.9405)
+Mean src dis: tensor(3.8539) and Mean tgt dis: tensor(3.8773)
+Mean src dis: tensor(2.8699) and Mean tgt dis: tensor(2.9279)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch8:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch8:  25%|██▌       | 1/4 [00:54<02:44, 54.86s/it][A
+
+Run0_Epoch8:  50%|█████     | 2/4 [01:45<01:45, 52.59s/it][A
+
+Run0_Epoch8:  75%|███████▌  | 3/4 [02:37<00:52, 52.36s/it][A
+
+Run0_Epoch8: 100%|██████████| 4/4 [03:16<00:00, 46.80s/it][A
+Run0_Epoch8: 100%|██████████| 4/4 [03:16<00:00, 49.06s/it]
+Mean src dis: tensor(3.8974) and Mean tgt dis: tensor(3.9172)
+Mean src dis: tensor(3.0175) and Mean tgt dis: tensor(2.9284)
+Mean src dis: tensor(3.7619) and Mean tgt dis: tensor(3.7626)
+Mean src dis: tensor(2.9699) and Mean tgt dis: tensor(3.0231)
+Mean src dis: tensor(3.7711) and Mean tgt dis: tensor(3.7899)
+Mean src dis: tensor(3.0851) and Mean tgt dis: tensor(3.0170)
+Mean src dis: tensor(3.9429) and Mean tgt dis: tensor(3.9392)
+Mean src dis: tensor(2.9785) and Mean tgt dis: tensor(3.2493)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch9:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch9:  25%|██▌       | 1/4 [00:51<02:35, 51.87s/it][A
+
+Run0_Epoch9:  50%|█████     | 2/4 [01:50<01:51, 55.75s/it][A
+
+Run0_Epoch9:  75%|███████▌  | 3/4 [02:40<00:53, 53.17s/it][A
+
+Run0_Epoch9: 100%|██████████| 4/4 [03:31<00:00, 52.26s/it][A
+Run0_Epoch9: 100%|██████████| 4/4 [03:31<00:00, 52.83s/it]
+Mean src dis: tensor(4.0046) and Mean tgt dis: tensor(4.0257)
+Mean src dis: tensor(3.0287) and Mean tgt dis: tensor(2.8970)
+Mean src dis: tensor(3.8206) and Mean tgt dis: tensor(3.8330)
+Mean src dis: tensor(2.8642) and Mean tgt dis: tensor(3.0961)
+Mean src dis: tensor(3.7173) and Mean tgt dis: tensor(3.7217)
+Mean src dis: tensor(2.9654) and Mean tgt dis: tensor(2.8957)
+Mean src dis: tensor(3.7991) and Mean tgt dis: tensor(3.7972)
+Mean src dis: tensor(3.0019) and Mean tgt dis: tensor(3.0617)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+
+Run0_Epoch10:   0%|          | 0/4 [00:00<?, ?it/s][A
+
+Run0_Epoch10:  25%|██▌       | 1/4 [00:45<02:16, 45.65s/it][A
+
+Run0_Epoch10:  50%|█████     | 2/4 [01:47<01:50, 55.21s/it][A
+
+Run0_Epoch10:  75%|███████▌  | 3/4 [02:47<00:57, 57.14s/it][A
+
+Run0_Epoch10: 100%|██████████| 4/4 [03:28<00:00, 50.96s/it][A
+Run0_Epoch10: 100%|██████████| 4/4 [03:28<00:00, 52.12s/it]
+Mean src dis: tensor(3.8709) and Mean tgt dis: tensor(3.8950)
+Mean src dis: tensor(2.9545) and Mean tgt dis: tensor(3.2157)
+Mean src dis: tensor(3.8125) and Mean tgt dis: tensor(3.8226)
+Mean src dis: tensor(3.1531) and Mean tgt dis: tensor(2.8562)
+Mean src dis: tensor(3.8780) and Mean tgt dis: tensor(3.8845)
+Mean src dis: tensor(2.9347) and Mean tgt dis: tensor(2.9533)
+Mean src dis: tensor(3.7748) and Mean tgt dis: tensor(3.7692)
+Mean src dis: tensor(3.1892) and Mean tgt dis: tensor(2.9496)
+Mean src dis: tensor(3.8599) and Mean tgt dis: tensor(3.8237)
+Mean src dis: tensor(3.3174) and Mean tgt dis: tensor(3.5027)
+Mean src dis: tensor(3.5287) and Mean tgt dis: tensor(3.4519)
+Mean src dis: tensor(2.9995) and Mean tgt dis: tensor(3.2454)
+Mean src dis: tensor(2.9471) and Mean tgt dis: tensor(3.0624)
+
+Training over 1 seeds: 100%|██████████| 1/1 [39:20<00:00, 2360.63s/it]
+Training over 1 seeds: 100%|██████████| 1/1 [39:20<00:00, 2360.63s/it]
+MRR
+---
+Highest Valid: 66.10 ± nan
+   Final Test: 56.32 ± nan
